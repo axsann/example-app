@@ -1,11 +1,13 @@
 <?php
 
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
+declare(strict_types=1);
 
 use App\ViewModels\WelcomeViewModel;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
+
+use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -66,6 +68,6 @@ function hoge(int $x): int
 function fuga(Collection $list): Collection
 {
     return $list->map(function (int $item) {
-        return strval($item);
+        return (string) $item;
     });
 }

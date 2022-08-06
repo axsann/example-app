@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Middleware;
 
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 use Tightenco\Ziggy\Ziggy;
 
-class HandleInertiaRequests extends Middleware
+final class HandleInertiaRequests extends Middleware
 {
     /**
      * The root template that is loaded on the first page visit.
@@ -18,7 +20,7 @@ class HandleInertiaRequests extends Middleware
     /**
      * Determine the current asset version.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return string|null
      */
     public function version(Request $request)
@@ -29,7 +31,7 @@ class HandleInertiaRequests extends Middleware
     /**
      * Define the props that are shared by default.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return array<string, mixed>
      */
     public function share(Request $request)
@@ -39,7 +41,7 @@ class HandleInertiaRequests extends Middleware
                 'user' => $request->user(),
             ],
             'ziggy' => function () use ($request) {
-                return array_merge((new Ziggy)->toArray(), [
+                return array_merge((new Ziggy())->toArray(), [
                     'location' => $request->url(),
                 ]);
             },

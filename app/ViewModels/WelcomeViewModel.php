@@ -1,12 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\ViewModels;
 
 use Illuminate\Support\Collection;
 
-class WelcomeViewModel
+final class WelcomeViewModel
 {
-
     /**
      * @var Collection<int, string> $list
      */
