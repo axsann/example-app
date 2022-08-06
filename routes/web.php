@@ -20,13 +20,26 @@ use Inertia\Inertia;
 |
 */
 
+final class WelcomeVM
+{
+    public function __construct(
+        public bool $canLogin,
+        public bool $canRegister,
+        public string $laravelVersion,
+        public string $phpVersion
+    ) {
+    }
+}
+
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    $vm = new WelcomeVM(
+        canLogin: Route::has('login'),
+        canRegister: Route::has('register'),
+        laravelVersion: Application::VERSION,
+        phpVersion: PHP_VERSION
+    );
+
+    return Inertia::render('Welcome', (array) $vm);
 });
 
 Route::get('/dashboard', function () {
