@@ -1,8 +1,8 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Collection;
-use App\ViewModels\WelcomeViewModel;
+use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,35 +16,16 @@ use App\ViewModels\WelcomeViewModel;
 */
 
 Route::get('/', function () {
-    hoge(10000);
-    $foo = fuga(collect([1, 2, 3, 4]));
-    print($foo);
-    $foo->each(function ($item) {
-        print($item);
-    });
-    hoge(3);
-    $vm = new WelcomeViewModel(1, $foo);
-    $hoge = $vm->list->map(function ($item) {
-        return $item;
-    });
-    print($hoge);
-    return view('welcome')
-        ->with('vm', $vm);
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
 });
 
-function hoge(int $x): int
-{
-    print($x);
-    return $x;
-}
+Route::get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-/**
- * @param Collection<int, int> $list
- * @return Collection<int, string>
- */
-function fuga(Collection $list): Collection
-{
-    return $list->map(function ($item) {
-        return strval($item);
-    });
-}
+require __DIR__ . '/auth.php';

@@ -10,6 +10,7 @@
         <directory name="."/>
         <ignoreFiles>
             <directory name="vendor"/>
+            <directory name="routes"/>
             <file name="routes/console.php"/>
         </ignoreFiles>
     </projectFiles>
