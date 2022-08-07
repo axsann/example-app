@@ -39,7 +39,7 @@ Route::get('/', function () {
         phpVersion: PHP_VERSION
     );
 
-    return Inertia::render('Welcome', (array) $vm);
+    return Inertia::render('Welcome', json_decode(json_encode($vm), true));
 });
 
 Route::get('/dashboard', function () {
