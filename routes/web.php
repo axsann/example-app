@@ -80,7 +80,5 @@ function hoge(int $x): int
  */
 function fuga(Collection $list): Collection
 {
-    return $list->map(function (int $item) {
-        return (string) $item;
-    });
+    return $list->map(fn (int $item) => (string) $item);
 }
