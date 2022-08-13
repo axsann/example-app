@@ -82,3 +82,12 @@ function fuga(Collection $list): Collection
 {
     return $list->map(fn (int $item) => (string) $item);
 }
+
+/**
+ * @param Collection<int, WelcomeVM> $list
+ * @return Collection<int, string>
+ */
+function fuga2(Collection $list): Collection
+{
+    return $list->map(fn (WelcomeVM $item) => $item->laravelVersion);
+}
