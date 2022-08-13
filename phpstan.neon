@@ -16,6 +16,15 @@ parameters:
     excludePaths:
         - ./routes/console.php
         - ./app/Http/Controllers/Auth/VerifyEmailController.php
+        - ./app/PhpstanRules
         - ./*/*/FileToBeExcluded.php
 
-    checkMissingIterableValueType: true
+services:
+    -
+        class: App\PhpStanRules\MissingClosureParameterTypehintRule
+        tags:
+            - phpstan.rules.rule
+    -
+        class: App\PhpStanRules\MissingArrowFunctionParameterTypehintRule
+        tags:
+            - phpstan.rules.rule

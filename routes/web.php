@@ -55,12 +55,12 @@ Route::get('/hoge', function () {
     hoge(10000);
     $foo = fuga(collect([1, 2, 3, 4]));
     print($foo);
-    $foo->each(function ($item) {
+    $foo->each(function (string $item) {
         print($item);
     });
     hoge(3);
     $vm = new WelcomeViewModel(1, $foo);
-    $hoge = $vm->list->map(function ($item) {
+    $hoge = $vm->list->map(function (string $item) {
         return $item;
     });
     print($hoge);
